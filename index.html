@@ -295,4 +295,176 @@ function go(n) {
   if (n === 8) $('#wa').href = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(message());
 }
 let tt;
+function ead>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="cur" aria-hidden="true"></div>
+<div id="loader" role="status" aria-label="Loading"><span>♥</span></div>
+
+<header id="prog" aria-live="polite"><span id="plabel"></span><i><b id="pbar"></b></i></header>
+
+<main id="stage">
+
+<section class="screen" data-s="0" aria-label="The invitation"><div class="wrap">
+  <h1 class="rv" style="--i:0">Hey, you…</h1>
+  <p class="lead rv" style="--i:1">I have something important to ask you.</p>
+  <h2 class="rv" style="--i:2">Would you go on a date <em>with me?</em> ❤️</h2>
+  <div class="row rv" style="--i:3">
+    <button id="yes" class="btn">Yes ❤️</button>
+    <button id="no" class="btn ghost">No 🙈</button>
+  </div>
+  <p id="hint" class="hint" aria-live="polite"></p>
+</div></section>
+
+<section class="screen" data-s="no" aria-label="A gentle no"><div class="wrap">
+  <h1 class="rv">That's perfectly okay.</h1>
+  <p class="lead rv" style="--i:1">Thank you for being honest. 🤍</p>
+  <div class="row rv" style="--i:2"><button class="btn" data-restart>Wait… let me reconsider</button></div>
+</div></section>
+
+<section class="screen" data-s="1" aria-label="The yes moment"><div class="wrap">
+  <h1 class="rv">Glad you picked <em>yes.</em> ❤️</h1>
+  <p class="lead rv" style="--i:2">You just made someone very happy.</p>
+  <blockquote class="rv" style="--i:4">Some moments are planned.<br>Some moments simply become memories.</blockquote>
+  <div class="row rv" style="--i:6"><button class="btn" data-next>Now let's plan our date →</button></div>
+</div></section>
+
+<section class="screen" data-s="2" aria-label="Kind of date"><div class="wrap">
+  <h1 class="rv">So… what are we doing?</h1>
+  <p class="lead rv" style="--i:1">You get to help design our perfect evening.</p>
+  <div class="cards rv" style="--i:2" data-k="type" data-auto data-say="Perfect choice. ❤️">
+    <button class="card" data-v="Dinner"><i>🍽️</i><b>Dinner</b><small>Candlelight &amp; good food</small></button>
+    <button class="card" data-v="Coffee &amp; Conversation"><i>☕</i><b>Coffee &amp; Conversation</b><small>Slow, warm, easy</small></button>
+    <button class="card" data-v="Sunset Date"><i>🌅</i><b>Sunset Date</b><small>Golden hour, just us</small></button>
+    <button class="card" data-v="Movie Night"><i>🎬</i><b>Movie Night</b><small>Popcorn and closeness</small></button>
+    <button class="card" data-v="Adventure"><i>🌳</i><b>Adventure</b><small>Somewhere new</small></button>
+    <button class="card" data-v="Surprise"><i>✨</i><b>Surprise Me</b><small>Trust me on this one</small></button>
+  </div>
+</div></section>
+
+<section class="screen" data-s="3" aria-label="Location"><div class="wrap">
+  <h1 class="rv">Where should we make the memory?</h1>
+  <div class="cards rv" style="--i:1" data-k="place" data-auto data-say="I can already picture us there. ❤️">
+    <button class="card" data-v="A Cozy Restaurant"><i>📍</i><b>A Cozy Restaurant</b></button>
+    <button class="card" data-v="City Lights"><i>🌆</i><b>City Lights</b></button>
+    <button class="card" data-v="An Outdoor Garden"><i>🌿</i><b>Outdoor Garden</b></button>
+    <button class="card" data-v="A Rooftop"><i>🌅</i><b>Rooftop</b></button>
+    <button class="card" data-v="A Cute Café"><i>☕</i><b>Cute Café</b></button>
+    <button class="card" data-v="You Choose"><i>✨</i><b>You Choose</b></button>
+  </div>
+  <div class="field rv" style="--i:2">
+    <label for="custom">Suggest another place</label>
+    <input id="custom" maxlength="60" placeholder="Somewhere only you know…" autocomplete="off">
+    <button class="btn" data-next data-need="place" data-say="I can already picture us there. ❤️">Continue →</button>
+  </div>
+</div></section>
+
+<section class="screen" data-s="4" aria-label="Pick the date"><div class="wrap">
+  <h1 class="rv">When are you free?</h1>
+  <div class="cal rv" style="--i:1">
+    <div class="calhead">
+      <button id="prev" class="nav" aria-label="Previous month">‹</button>
+      <b id="mlabel"></b>
+      <button id="next" class="nav" aria-label="Next month">›</button>
+    </div>
+    <div class="dow" aria-hidden="true"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+    <div id="days" class="days"></div>
+  </div>
+</div></section>
+
+<section class="screen" data-s="5" aria-label="Food"><div class="wrap">
+  <p class="eyebrow rv">Important question…</p>
+  <h1 class="rv" style="--i:1">What are we eating?</h1>
+  <p class="lead rv" style="--i:2">Pick as many as you like. I trust your taste 😌</p>
+  <div class="cards sm rv" style="--i:3" data-k="food" data-multi>
+    <button class="card" data-v="Pizza"><i>🍕</i><b>Pizza</b></button>
+    <button class="card" data-v="Sushi"><i>🍣</i><b>Sushi</b></button>
+    <button class="card" data-v="Burgers"><i>🍔</i><b>Burgers</b></button>
+    <button class="card" data-v="Pasta"><i>🍝</i><b>Pasta</b></button>
+    <button class="card" data-v="Steak"><i>🥩</i><b>Steak</b></button>
+    <button class="card" data-v="Tacos"><i>🌮</i><b>Tacos</b></button>
+    <button class="card" data-v="Chicken"><i>🍗</i><b>Chicken</b></button>
+    <button class="card" data-v="Something light"><i>🥗</i><b>Something light</b></button>
+    <button class="card" data-v="Your favorite"><i>❤️</i><b>Your favorite</b></button>
+  </div>
+  <div class="row"><button class="btn" data-next data-need="food" data-say="You have surprisingly good taste. 😌">Continue →</button></div>
+</div></section>
+
+<section class="screen" data-s="6" aria-label="Personal touch"><div class="wrap">
+  <h1 class="rv">What's your perfect date vibe?</h1>
+  <div class="cards sm rv" style="--i:1" data-k="vibe">
+    <button class="card" data-v="Deep conversations"><i>💬</i><b>Deep conversations</b></button>
+    <button class="card" data-v="Laughing nonstop"><i>😂</i><b>Laugh until we can't breathe</b></button>
+    <button class="card" data-v="Music &amp; good vibes"><i>🎶</i><b>Music &amp; good vibes</b></button>
+    <button class="card" data-v="Romantic &amp; calm"><i>🌹</i><b>Romantic &amp; calm</b></button>
+    <button class="card" data-v="A little adventurous"><i>🔥</i><b>A little adventurous</b></button>
+  </div>
+  <div class="field rv" style="--i:2">
+    <label for="note">Anything I should know? <span>(optional)</span></label>
+    <textarea id="note" rows="3" maxlength="240" placeholder="Tell me something that would make this date perfect…"></textarea>
+    <button class="btn" data-next data-say="Okay, this officially sounds like a great date.">Continue →</button>
+  </div>
+</div></section>
+
+<section class="screen" data-s="7" aria-label="Summary"><div class="wrap">
+  <h1 class="rv">Our Date ❤️</h1>
+  <article class="ticket rv" style="--i:1" id="ticket" aria-label="Date summary"></article>
+  <div class="row rv" style="--i:2"><button class="btn" data-next>Looks perfect →</button></div>
+</div></section>
+
+<section class="screen" data-s="8" aria-label="Confirmation"><div class="wrap">
+  <h1 class="rv">It's a date. ❤️</h1>
+  <p class="lead rv" style="--i:2">Now all that's left is showing up…</p>
+  <p class="lead rv" style="--i:3">I'll take care of the rest.</p>
+  <div class="row col rv" style="--i:4">
+    <button id="save" class="btn">Save Our Date ❤️</button>
+    <a id="wa" class="btn ghost" target="_blank" rel="noopener">Send Our Date to WhatsApp 💬</a>
+    <button class="link" data-next>Continue</button>
+  </div>
+</div></section>
+
+<section class="screen" data-s="9" aria-label="The end"><div class="wrap fin">
+  <h1 class="rv" style="--i:0">One question.</h1>
+  <h1 class="rv" style="--i:1">One answer.</h1>
+  <h1 class="rv" style="--i:2"><em>One beautiful date waiting to happen.</em> ❤️</h1>
+  <p class="lead rv" style="--i:3">See you soon.</p>
+  <div class="beat rv" style="--i:3" aria-hidden="true">♥</div>
+  <div class="row rv" style="--i:4"><button class="link" data-restart>Start over</button></div>
+</div></section>
+
+</main>
+
+<button id="secret" class="secret" aria-label="A tiny secret">♥</button>
+<div id="pop" class="pop" hidden role="dialog" aria-label="A secret message"><div><p>P.S. I was hoping you'd say <em>yes.</em> ❤️</p><small>See you soon.</small></div></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const KEY = 'dateInvite.v1';
+const PHONE = ''; // optional: your number with country code, digits only (e.g. 254712345678) to open a chat with you directly
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const DEFAULTS = { step: 0, type: '', place: '', date: '', food: [], vibe: '', note: '' };
+let S = { ...DEFAULTS };
+try { S = { ...DEFAULTS, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const unesc = t => { const d = document.createElement('textarea'); d.innerHTML = t; return d.value; };
+
+/* ---------- navigation ---------- */
+const LABELS = ['01 — The Question', '01 — The Question', '02 — The Plan', '02 — The Plan', '03 — The Date', '04 — The Details', '04 — The Details', '05 — The Memory', '05 — The Memory', '05 — The Memory'];
+function go(n) {
+  S.step = n; save();
+  $$('.screen').forEach(s => s.classList.toggle('on', s.dataset.s === String(n)));
+  const on = $('.screen.on'); if (on) on.scrollTop = 0;
+  const num = typeof n === 'number';
+  $('#prog').classList.toggle('hide', !num || n === 0);
+  if (num) { $('#plabel').textContent = LABELS[n]; $('#pbar').style.width = (n / 9 * 100) + '%'; }
+  if (n === 1) burst();
+  if (n === 4) renderCal();
+  if (n === 7) renderSummary();
+  if (n === 8) $('#wa').href = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(message());
+}
+let tt;
 function 
