@@ -295,176 +295,150 @@ function go(n) {
   if (n === 8) $('#wa').href = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(message());
 }
 let tt;
-function ead>
-<body>
-<div class="glow g1"></div><div class="glow g2"></div>
-<canvas id="fx" aria-hidden="true"></canvas>
-<div class="cur" aria-hidden="true"></div>
-<div id="loader" role="status" aria-label="Loading"><span>♥</span></div>
+function say(t) { const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => el.classList.remove('on'), 1500); }
+const next = (msg, delay = 1000) => { if (msg) say(msg); setTimeout(() => go(S.step + 1), msg ? delay : 0); };
 
-<header id="prog" aria-live="polite"><span id="plabel"></span><i><b id="pbar"></b></i></header>
+/* ---------- question: yes / no ---------- */
+const yes = $('#yes'), no = $('#no'), hint = $('#hint');
+let tries = 0, ox = 0, oy = 0;
+const NO_LINES = ['Are you sure? 👀', "Okay… I'll give you one more chance.", 'Really? My heart can take it. Barely. 🥺'];
+yes.addEventListener('click', () => { burst(); document.body.animate([{ filter: 'brightness(1.5)' }, { filter: 'none' }], 700); setTimeout(() => go(1), 350); });
+no.addEventListener('click', () => {
+  if (tries >= 3) return go('no');
+  hint.textContent = NO_LINES[tries++];
+  const r = no.getBoundingClientRect();
+  const dx = (Math.random() < .5 ? -1 : 1) * (60 + Math.random() * 60), dy = (Math.random() - .5) * 120;
+  const inside = r.left + dx > 12 && r.right + dx < innerWidth - 12 && r.top + dy > 90 && r.bottom + dy < innerHeight - 12;
+  if (inside) { ox += dx; oy += dy; } else { ox = 0; oy = 0; }
+  no.style.transform = `translate(${ox}px,${oy}px)`;
+  yes.style.scale = 1 + tries * .07;
+});
+function resetQuestion() { tries = ox = oy = 0; no.style.transform = ''; yes.style.scale = ''; hint.textContent = ''; }
 
-<main id="stage">
-
-<section class="screen" data-s="0" aria-label="The invitation"><div class="wrap">
-  <h1 class="rv" style="--i:0">Hey, you…</h1>
-  <p class="lead rv" style="--i:1">I have something important to ask you.</p>
-  <h2 class="rv" style="--i:2">Would you go on a date <em>with me?</em> ❤️</h2>
-  <div class="row rv" style="--i:3">
-    <button id="yes" class="btn">Yes ❤️</button>
-    <button id="no" class="btn ghost">No 🙈</button>
-  </div>
-  <p id="hint" class="hint" aria-live="polite"></p>
-</div></section>
-
-<section class="screen" data-s="no" aria-label="A gentle no"><div class="wrap">
-  <h1 class="rv">That's perfectly okay.</h1>
-  <p class="lead rv" style="--i:1">Thank you for being honest. 🤍</p>
-  <div class="row rv" style="--i:2"><button class="btn" data-restart>Wait… let me reconsider</button></div>
-</div></section>
-
-<section class="screen" data-s="1" aria-label="The yes moment"><div class="wrap">
-  <h1 class="rv">Glad you picked <em>yes.</em> ❤️</h1>
-  <p class="lead rv" style="--i:2">You just made someone very happy.</p>
-  <blockquote class="rv" style="--i:4">Some moments are planned.<br>Some moments simply become memories.</blockquote>
-  <div class="row rv" style="--i:6"><button class="btn" data-next>Now let's plan our date →</button></div>
-</div></section>
-
-<section class="screen" data-s="2" aria-label="Kind of date"><div class="wrap">
-  <h1 class="rv">So… what are we doing?</h1>
-  <p class="lead rv" style="--i:1">You get to help design our perfect evening.</p>
-  <div class="cards rv" style="--i:2" data-k="type" data-auto data-say="Perfect choice. ❤️">
-    <button class="card" data-v="Dinner"><i>🍽️</i><b>Dinner</b><small>Candlelight &amp; good food</small></button>
-    <button class="card" data-v="Coffee &amp; Conversation"><i>☕</i><b>Coffee &amp; Conversation</b><small>Slow, warm, easy</small></button>
-    <button class="card" data-v="Sunset Date"><i>🌅</i><b>Sunset Date</b><small>Golden hour, just us</small></button>
-    <button class="card" data-v="Movie Night"><i>🎬</i><b>Movie Night</b><small>Popcorn and closeness</small></button>
-    <button class="card" data-v="Adventure"><i>🌳</i><b>Adventure</b><small>Somewhere new</small></button>
-    <button class="card" data-v="Surprise"><i>✨</i><b>Surprise Me</b><small>Trust me on this one</small></button>
-  </div>
-</div></section>
-
-<section class="screen" data-s="3" aria-label="Location"><div class="wrap">
-  <h1 class="rv">Where should we make the memory?</h1>
-  <div class="cards rv" style="--i:1" data-k="place" data-auto data-say="I can already picture us there. ❤️">
-    <button class="card" data-v="A Cozy Restaurant"><i>📍</i><b>A Cozy Restaurant</b></button>
-    <button class="card" data-v="City Lights"><i>🌆</i><b>City Lights</b></button>
-    <button class="card" data-v="An Outdoor Garden"><i>🌿</i><b>Outdoor Garden</b></button>
-    <button class="card" data-v="A Rooftop"><i>🌅</i><b>Rooftop</b></button>
-    <button class="card" data-v="A Cute Café"><i>☕</i><b>Cute Café</b></button>
-    <button class="card" data-v="You Choose"><i>✨</i><b>You Choose</b></button>
-  </div>
-  <div class="field rv" style="--i:2">
-    <label for="custom">Suggest another place</label>
-    <input id="custom" maxlength="60" placeholder="Somewhere only you know…" autocomplete="off">
-    <button class="btn" data-next data-need="place" data-say="I can already picture us there. ❤️">Continue →</button>
-  </div>
-</div></section>
-
-<section class="screen" data-s="4" aria-label="Pick the date"><div class="wrap">
-  <h1 class="rv">When are you free?</h1>
-  <div class="cal rv" style="--i:1">
-    <div class="calhead">
-      <button id="prev" class="nav" aria-label="Previous month">‹</button>
-      <b id="mlabel"></b>
-      <button id="next" class="nav" aria-label="Next month">›</button>
-    </div>
-    <div class="dow" aria-hidden="true"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
-    <div id="days" class="days"></div>
-  </div>
-</div></section>
-
-<section class="screen" data-s="5" aria-label="Food"><div class="wrap">
-  <p class="eyebrow rv">Important question…</p>
-  <h1 class="rv" style="--i:1">What are we eating?</h1>
-  <p class="lead rv" style="--i:2">Pick as many as you like. I trust your taste 😌</p>
-  <div class="cards sm rv" style="--i:3" data-k="food" data-multi>
-    <button class="card" data-v="Pizza"><i>🍕</i><b>Pizza</b></button>
-    <button class="card" data-v="Sushi"><i>🍣</i><b>Sushi</b></button>
-    <button class="card" data-v="Burgers"><i>🍔</i><b>Burgers</b></button>
-    <button class="card" data-v="Pasta"><i>🍝</i><b>Pasta</b></button>
-    <button class="card" data-v="Steak"><i>🥩</i><b>Steak</b></button>
-    <button class="card" data-v="Tacos"><i>🌮</i><b>Tacos</b></button>
-    <button class="card" data-v="Chicken"><i>🍗</i><b>Chicken</b></button>
-    <button class="card" data-v="Something light"><i>🥗</i><b>Something light</b></button>
-    <button class="card" data-v="Your favorite"><i>❤️</i><b>Your favorite</b></button>
-  </div>
-  <div class="row"><button class="btn" data-next data-need="food" data-say="You have surprisingly good taste. 😌">Continue →</button></div>
-</div></section>
-
-<section class="screen" data-s="6" aria-label="Personal touch"><div class="wrap">
-  <h1 class="rv">What's your perfect date vibe?</h1>
-  <div class="cards sm rv" style="--i:1" data-k="vibe">
-    <button class="card" data-v="Deep conversations"><i>💬</i><b>Deep conversations</b></button>
-    <button class="card" data-v="Laughing nonstop"><i>😂</i><b>Laugh until we can't breathe</b></button>
-    <button class="card" data-v="Music &amp; good vibes"><i>🎶</i><b>Music &amp; good vibes</b></button>
-    <button class="card" data-v="Romantic &amp; calm"><i>🌹</i><b>Romantic &amp; calm</b></button>
-    <button class="card" data-v="A little adventurous"><i>🔥</i><b>A little adventurous</b></button>
-  </div>
-  <div class="field rv" style="--i:2">
-    <label for="note">Anything I should know? <span>(optional)</span></label>
-    <textarea id="note" rows="3" maxlength="240" placeholder="Tell me something that would make this date perfect…"></textarea>
-    <button class="btn" data-next data-say="Okay, this officially sounds like a great date.">Continue →</button>
-  </div>
-</div></section>
-
-<section class="screen" data-s="7" aria-label="Summary"><div class="wrap">
-  <h1 class="rv">Our Date ❤️</h1>
-  <article class="ticket rv" style="--i:1" id="ticket" aria-label="Date summary"></article>
-  <div class="row rv" style="--i:2"><button class="btn" data-next>Looks perfect →</button></div>
-</div></section>
-
-<section class="screen" data-s="8" aria-label="Confirmation"><div class="wrap">
-  <h1 class="rv">It's a date. ❤️</h1>
-  <p class="lead rv" style="--i:2">Now all that's left is showing up…</p>
-  <p class="lead rv" style="--i:3">I'll take care of the rest.</p>
-  <div class="row col rv" style="--i:4">
-    <button id="save" class="btn">Save Our Date ❤️</button>
-    <a id="wa" class="btn ghost" target="_blank" rel="noopener">Send Our Date to WhatsApp 💬</a>
-    <button class="link" data-next>Continue</button>
-  </div>
-</div></section>
-
-<section class="screen" data-s="9" aria-label="The end"><div class="wrap fin">
-  <h1 class="rv" style="--i:0">One question.</h1>
-  <h1 class="rv" style="--i:1">One answer.</h1>
-  <h1 class="rv" style="--i:2"><em>One beautiful date waiting to happen.</em> ❤️</h1>
-  <p class="lead rv" style="--i:3">See you soon.</p>
-  <div class="beat rv" style="--i:3" aria-hidden="true">♥</div>
-  <div class="row rv" style="--i:4"><button class="link" data-restart>Start over</button></div>
-</div></section>
-
-</main>
-
-<button id="secret" class="secret" aria-label="A tiny secret">♥</button>
-<div id="pop" class="pop" hidden role="dialog" aria-label="A secret message"><div><p>P.S. I was hoping you'd say <em>yes.</em> ❤️</p><small>See you soon.</small></div></div>
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script>(() => {
-'use strict';
-const $ = (s, r = document) => r.querySelector(s);
-const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const KEY = 'dateInvite.v1';
-const PHONE = ''; // optional: your number with country code, digits only (e.g. 254712345678) to open a chat with you directly
-const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const DEFAULTS = { step: 0, type: '', place: '', date: '', food: [], vibe: '', note: '' };
-let S = { ...DEFAULTS };
-try { S = { ...DEFAULTS, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch (e) {}
-const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
-const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const unesc = t => { const d = document.createElement('textarea'); d.innerHTML = t; return d.value; };
-
-/* ---------- navigation ---------- */
-const LABELS = ['01 — The Question', '01 — The Question', '02 — The Plan', '02 — The Plan', '03 — The Date', '04 — The Details', '04 — The Details', '05 — The Memory', '05 — The Memory', '05 — The Memory'];
-function go(n) {
-  S.step = n; save();
-  $$('.screen').forEach(s => s.classList.toggle('on', s.dataset.s === String(n)));
-  const on = $('.screen.on'); if (on) on.scrollTop = 0;
-  const num = typeof n === 'number';
-  $('#prog').classList.toggle('hide', !num || n === 0);
-  if (num) { $('#plabel').textContent = LABELS[n]; $('#pbar').style.width = (n / 9 * 100) + '%'; }
-  if (n === 1) burst();
-  if (n === 4) renderCal();
-  if (n === 7) renderSummary();
-  if (n === 8) $('#wa').href = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(message());
+/* ---------- selectable cards ---------- */
+const custom = $('#custom'), note = $('#note');
+function paint() {
+  $$('.cards').forEach(g => {
+    const k = g.dataset.k, multi = g.hasAttribute('data-multi');
+    $$('.card', g).forEach(c => c.setAttribute('aria-pressed', multi ? S[k].includes(c.dataset.v) : S[k] === c.dataset.v));
+  });
+  custom.value = $$('.cards[data-k="place"] .card').some(c => c.dataset.v === S.place) ? '' : S.place;
+  note.value = S.note;
 }
-let tt;
-function 
+$$('.cards').forEach(g => g.addEventListener('click', e => {
+  const c = e.target.closest('.card'); if (!c) return;
+  const k = g.dataset.k, v = c.dataset.v;
+  if (g.hasAttribute('data-multi')) S[k] = S[k].includes(v) ? S[k].filter(x => x !== v) : [...S[k], v];
+  else S[k] = v;
+  if (k === 'place') custom.value = '';
+  save(); paint();
+  if (g.hasAttribute('data-auto')) next(g.dataset.say);
+}));
+custom.addEventListener('input', () => { S.place = custom.value.trim(); save(); paint(); custom.value = S.place; });
+note.addEventListener('input', () => { S.note = note.value.trim(); save(); });
+$$('[data-next]').forEach(b => b.addEventListener('click', () => {
+  const need = b.dataset.need;
+  if (need && !(Array.isArray(S[need]) ? S[need].length : S[need])) return say('Pick one for me 😌');
+  next(b.dataset.say, 900);
+}));
+
+/* ---------- calendar ---------- */
+const vm = new Date(); vm.setDate(1);
+const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+function renderCal() {
+  const t = new Date(); t.setHours(0, 0, 0, 0);
+  const y = vm.getFullYear(), m = vm.getMonth(), lead = new Date(y, m, 1).getDay(), n = new Date(y, m + 1, 0).getDate();
+  $('#mlabel').textContent = vm.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+  let h = '<span></span>'.repeat(lead);
+  for (let d = 1; d <= n; d++) {
+    const dt = new Date(y, m, d), id = iso(dt);
+    h += `<button class="day" data-d="${id}" ${dt < t ? 'disabled' : ''} aria-pressed="${S.date === id}" aria-label="${dt.toDateString()}">${d}</button>`;
+  }
+  $('#days').innerHTML = h;
+  $('#prev').disabled = y === t.getFullYear() && m === t.getMonth();
+}
+$('#prev').addEventListener('click', () => { vm.setMonth(vm.getMonth() - 1); renderCal(); });
+$('#next').addEventListener('click', () => { vm.setMonth(vm.getMonth() + 1); renderCal(); });
+$('#days').addEventListener('click', e => {
+  const b = e.target.closest('.day'); if (!b || b.disabled) return;
+  S.date = b.dataset.d; save(); renderCal(); next("Perfect. I'll remember that date. ❤️", 1200);
+});
+
+/* ---------- summary / save / share ---------- */
+const dateText = () => S.date ? new Date(S.date + 'T00:00:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }) : 'Soon';
+const rows = () => [
+  ['Date', dateText(), '📅'], ['Location', S.place || 'You choose', '📍'],
+  ['Food', S.food.length ? S.food.join(' + ') : 'Surprise me', '🍽️'],
+  ['Occasion', unesc(S.type || 'Surprise'), '✨'], ['Vibe', unesc(S.vibe || 'Whatever feels right'), '💫']
+];
+function renderSummary() {
+  $('#ticket').innerHTML = rows().map(([l, v]) => `<div><small>${l}</small><b class="v">${esc(v)}</b></div>`).join('') +
+    (S.note ? `<div><small>Note</small><b class="v">“${esc(S.note)}”</b></div>` : '');
+}
+const message = () => `It's a date. ❤️\n\n` + rows().map(([l, v, e]) => `${e} ${v}`).join('\n') + (S.note ? `\n\n💌 “${S.note}”` : '') + `\n\nSee you soon.`;
+$('#save').addEventListener('click', () => {
+  const c = document.createElement('canvas'); c.width = 1080; c.height = 1350;
+  const x = c.getContext('2d'), g = x.createLinearGradient(0, 0, 0, 1350);
+  g.addColorStop(0, '#5a1428'); g.addColorStop(1, '#1c0a10'); x.fillStyle = g; x.fillRect(0, 0, 1080, 1350);
+  x.strokeStyle = '#c9a45c'; x.lineWidth = 3; x.strokeRect(50, 50, 980, 1250); x.lineWidth = 1; x.strokeRect(72, 72, 936, 1206);
+  x.textAlign = 'center'; x.fillStyle = '#e8d2a6'; x.font = 'italic 500 120px "Cormorant Garamond",Georgia,serif'; x.fillText('Our Date', 540, 260);
+  x.fillStyle = '#d9a5a0'; x.font = '70px Georgia,serif'; x.fillText('♥', 540, 350);
+  let y = 500;
+  rows().concat(S.note ? [['Note', '“' + S.note + '”']] : []).forEach(([l, v]) => {
+    x.fillStyle = '#c9a45c'; x.font = '500 28px "DM Sans",sans-serif'; x.fillText(l.toUpperCase().split('').join(' '), 540, y);
+    let s = 62; do { x.font = `500 ${s}px "Cormorant Garamond",Georgia,serif`; s -= 2; } while (x.measureText(v).width > 840 && s > 24);
+    x.fillStyle = '#f6efe4'; x.fillText(v, 540, y + 70); y += 150;
+  });
+  x.fillStyle = '#e8d2a6'; x.font = 'italic 44px "Cormorant Garamond",Georgia,serif'; x.fillText('See you soon.', 540, 1230);
+  const a = document.createElement('a'); a.download = 'our-date.png'; a.href = c.toDataURL('image/png'); a.click();
+  say('Saved. Keep it somewhere safe. ❤️');
+});
+
+/* ---------- restart, secret, keyboard ---------- */
+$$('[data-restart]').forEach(b => b.addEventListener('click', () => { S = { ...DEFAULTS }; save(); resetQuestion(); paint(); go(0); }));
+const pop = $('#pop');
+$('#secret').addEventListener('click', () => { pop.hidden = false; burst(); });
+pop.addEventListener('click', () => pop.hidden = true);
+addEventListener('keydown', e => { if (e.key === 'Escape') pop.hidden = true; });
+
+/* ---------- ambient hearts + confetti + cursor ---------- */
+const cv = $('#fx'), cx = cv.getContext('2d'), COL = ['#d9a5a0', '#e8d2a6', '#c9a45c', '#f6efe4'];
+let W, H; const F = [], C = [];
+const size = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; };
+addEventListener('resize', size); size();
+const heart = (y = H + 20) => ({ x: Math.random() * W, y, s: 8 + Math.random() * 14, v: .2 + Math.random() * .45, a: .08 + Math.random() * .22, w: Math.random() * 6 });
+function burst() {
+  if (RM) return;
+  for (let i = 0; i < 90; i++) {
+    const a = Math.random() * Math.PI * 2, sp = 4 + Math.random() * 8;
+    C.push({ x: W / 2, y: H / 2, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 4, s: 10 + Math.random() * 14, l: 1, c: COL[i % 4], ch: ['♥', '✦', '•'][i % 3] });
+  }
+}
+function loop() {
+  cx.clearRect(0, 0, W, H); cx.textAlign = 'center';
+  while (F.length < 22) F.push(heart(Math.random() * H));
+  F.forEach((p, i) => {
+    p.y -= p.v; p.w += .01; p.x += Math.sin(p.w) * .3;
+    if (p.y < -30) F[i] = heart();
+    cx.globalAlpha = p.a; cx.fillStyle = '#d9a5a0'; cx.font = p.s + 'px serif'; cx.fillText('♥', p.x, p.y);
+  });
+  for (let i = C.length - 1; i >= 0; i--) {
+    const p = C[i]; p.x += p.vx; p.y += p.vy; p.vy += .13; p.vx *= .985; p.l -= .008;
+    if (p.l <= 0) { C.splice(i, 1); continue; }
+    cx.globalAlpha = p.l; cx.fillStyle = p.c; cx.font = p.s + 'px serif'; cx.fillText(p.ch, p.x, p.y);
+  }
+  requestAnimationFrame(loop);
+}
+if (!RM) loop();
+const cur = $('.cur');
+addEventListener('pointermove', e => { if (e.pointerType !== 'mouse') return; cur.classList.add('on'); cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px'; });
+document.addEventListener('pointerover', e => cur.style.transform = e.target.closest('button,a,input,textarea') ? 'scale(1.7)' : '');
+
+/* ---------- boot ---------- */
+paint();
+go(Number.isInteger(S.step) ? S.step : 0);
+setTimeout(() => $('#loader').classList.add('off'), RM ? 0 : 1300);
+})();
+</script>
+</body>
+</html>
